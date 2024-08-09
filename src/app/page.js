@@ -97,10 +97,10 @@ export default function Home() {
                 <div className="text-center mt-4">
                   <Image
                     className="weatherBox img-fluid"
+                    alt="Weather Icon"
                     src={image}
                     width={150}
                     height={150}
-                    alt="Weather icon"
                   />
                   <p className="temperature display-4 text-primary">
                     {details.temperature}

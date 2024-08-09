@@ -26,6 +26,7 @@ export default function About() {
         </div>
         <div className="pe-5 align-self-center">
           <Image
+            alt="Ganesh"
             width={225}
             height={150}
             src="/Ganesh.jpeg"
@@ -41,6 +42,7 @@ export default function About() {
       >
         <div className="ps-5 align-self-center">
           <Image
+            alt="Lokesh"
             width={250}
             height={150}
             src="/Lokesh.jpeg"
