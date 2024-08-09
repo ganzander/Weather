@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 export default function Navbar() {
@@ -5,7 +6,9 @@ export default function Navbar() {
     <header className="sticky-top py-3">
       <div className="container d-flex align-items-center">
         <div className="logo me-auto">
-          <img
+          <Image
+            width={150}
+            height={150}
             src="/gif3.gif"
             alt="Logo"
             className="img-fluid"

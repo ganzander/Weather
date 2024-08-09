@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faSearchengin } from "@fortawesome/free-brands-svg-icons";
 import Navbar from "@/components/Navbar";
+import Image from "next/image";
 
 export default function Home() {
   const [location, setLocation] = useState("");
@@ -94,10 +95,11 @@ export default function Home() {
             {imgPresent && (
               <>
                 <div className="text-center mt-4">
-                  <img
+                  <Image
                     className="weatherBox img-fluid"
                     src={image}
-                    style={{ height: "10vh" }}
+                    width={150}
+                    height={150}
                     alt="Weather icon"
                   />
                   <p className="temperature display-4 text-primary">

@@ -4,6 +4,7 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import { useRouter } from "next/navigation";
 import "@/assets/about-section.css";
+import Image from "next/image";
 
 export default function About() {
   const router = useRouter();
@@ -24,7 +25,9 @@ export default function About() {
           </p>
         </div>
         <div className="pe-5 align-self-center">
-          <img
+          <Image
+            width={225}
+            height={150}
             src="/Ganesh.jpeg"
             className="rounded"
             style={{ height: "15vw" }}
@@ -37,7 +40,9 @@ export default function About() {
         style={{ backgroundColor: "white" }}
       >
         <div className="ps-5 align-self-center">
-          <img
+          <Image
+            width={250}
+            height={150}
             src="/Lokesh.jpeg"
             className="rounded"
             style={{ height: "15vw" }}
