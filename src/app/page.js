@@ -1,95 +1,143 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
+import {
+  faLocationDot,
+  faWater,
+  faWind,
+} from "@fortawesome/free-solid-svg-icons";
+import { faSearchengin } from "@fortawesome/free-brands-svg-icons";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
+  const [location, setLocation] = useState("");
+  const [image, setImage] = useState("");
+  const [imgPresent, setImagePresent] = useState(false);
+  const [details, setDetails] = useState({
+    temperature: "",
+    description: "",
+    humidity: "",
+    wind: "",
+  });
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    try {
+      await axios
+        .get(
+          `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.Api_Key}&units=metric`
+        )
+        .then((result) => {
+          console.log(result.data.weather[0].main);
+          setImagePresent(true);
+          setDetails({
+            description: `${result.data.weather[0].description}`,
+            humidity: `${result.data.main.humidity}%`,
+            wind: `${result.data.wind.speed}Km/h`,
+            temperature: `${result.data.main.temp}°C`,
+          });
+          switch (result.data.weather[0].main) {
+            case "Clear":
+              setImage("/clear.png");
+              break;
+            case "Rain":
+              setImage("/rain.png");
+              break;
+            case "Snow":
+              setImage("/snow.png");
+              break;
+            case "Clouds":
+              setImage("/cloud.png");
+              break;
+            case "Haze":
+              setImage("/mist.png");
+              break;
+            case "Mist":
+              setImage("/mist.png");
+              break;
+            default:
+              setImage("/404.png");
+          }
+        });
+    } catch (error) {
+      console.error("Error fetching weather data:", error);
+    }
+  }
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <div style={{ height: "100vh", backgroundColor: "#258db3" }}>
+      <Navbar />
+
+      <div className="container d-flex flex-column align-items-center py-5">
+        <div className="col-md-6">
+          <div className="card shadow-lg p-4">
+            <div className="search-box d-flex align-items-center">
+              <FontAwesomeIcon
+                icon={faLocationDot}
+                size="2x"
+                className="me-3 text-primary"
+              />
+              <form onSubmit={handleSubmit} className="d-flex w-100">
+                <input
+                  type="text"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  placeholder="Enter your location"
+                  className="form-control me-2"
+                />
+                <button type="submit" className="btn btn-primary">
+                  <FontAwesomeIcon icon={faSearchengin} />
+                </button>
+              </form>
+            </div>
+            {imgPresent && (
+              <>
+                <div className="text-center mt-4">
+                  <img
+                    className="weatherBox img-fluid"
+                    src={image}
+                    style={{ height: "10vh" }}
+                    alt="Weather icon"
+                  />
+                  <p className="temperature display-4 text-primary">
+                    {details.temperature}
+                  </p>
+                  <p className="description text-capitalize">
+                    {details.description}
+                  </p>
+                </div>
+                <div className="weather-details row text-center fadeIn mt-4">
+                  <div className="col-6 d-flex align-items-center justify-content-center">
+                    <FontAwesomeIcon
+                      icon={faWater}
+                      size="lg"
+                      className="me-2 text-primary"
+                    />
+                    <div className="text-start">
+                      <span className="h5 text-primary">
+                        {details.humidity}
+                      </span>
+                      <p className="mb-0 small text-primary">Humidity</p>
+                    </div>
+                  </div>
+                  <div className="col-6 d-flex align-items-center justify-content-center">
+                    <FontAwesomeIcon
+                      icon={faWind}
+                      size="lg"
+                      className="me-2 text-primary"
+                    />
+                    <div className="text-start">
+                      <span className="h5 text-primary">{details.wind}</span>
+                      <p className="mb-0 small text-primary">Wind Speed</p>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </div>
   );
 }
