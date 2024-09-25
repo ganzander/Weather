@@ -14,7 +14,7 @@ export default function About() {
       <div className="about-section d-flex justify-content-around">
         <div className="ps-5 pe-5">
           <h2 style={{ fontWeight: "bold" }}>Ganesh Mangla</h2>
-          <p className="p-2">
+          <p className="p-2 ">
             I'm Ganesh Kumar Mangla, an enthusiastic undergraduate pursuing a
             Bachelor of Technology in Computer Engineering with a focus on Full
             Stack Web Development (MERN) and Data Structures & Algorithms (DSA).
