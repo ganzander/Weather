@@ -5,11 +5,9 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWater, faWind } from "@fortawesome/free-solid-svg-icons";
-import { faSearchengin } from "@fortawesome/free-brands-svg-icons";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-
-import { Spotlight } from "@/components/ui/spotlight";
+import { Spotlight } from "@/components/ui/Spotlight";
 
 export default function Home() {
   const [location, setLocation] = useState("");

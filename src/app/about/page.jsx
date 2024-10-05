@@ -3,11 +3,16 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { Spotlight } from "@/components/ui/Spotlight";
 
 export default function About() {
   const router = useRouter();
   return (
     <div className="h-screen w-screen pt-28">
+      <Spotlight
+        className="-top-40 left-0 md:left-60 md:-top-20"
+        fill="white"
+      />
       <div className="w-full flex items-center justify-evenly h-1/2 p-10 gap-5 bg-[#258db3]">
         <div className="w-1/2">
           <Link href="https://ganesh-mangla-portfolio.vercel.app/">
