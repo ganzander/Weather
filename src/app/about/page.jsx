@@ -1,8 +1,8 @@
 "use client";
-import Navbar from "@/components/Navbar";
 import React from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function About() {
   const router = useRouter();
@@ -10,9 +10,11 @@ export default function About() {
     <div className="h-screen w-screen pt-28">
       <div className="w-full flex items-center justify-evenly h-1/2 p-10 gap-5 bg-[#258db3]">
         <div className="w-1/2">
-          <h2 className="text-white text-2xl md:text-5xl text-center">
-            Ganesh Mangla
-          </h2>
+          <Link href="https://ganesh-mangla-portfolio.vercel.app/">
+            <h2 className="text-white text-2xl md:text-5xl text-center">
+              Ganesh Mangla
+            </h2>
+          </Link>
         </div>
         <div className="w-1/2 flex justify-center">
           <Image
@@ -36,9 +38,11 @@ export default function About() {
           />
         </div>
         <div className="w-1/2">
-          <h2 className="text-black text-2xl md:text-5xl text-center">
-            Lokesh Yadav
-          </h2>
+          <Link href="https://portfolio-five-rho.vercel.app/">
+            <h2 className="text-black text-2xl md:text-5xl text-center">
+              Lokesh Yadav
+            </h2>
+          </Link>
         </div>
       </div>
     </div>
